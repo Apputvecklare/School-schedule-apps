@@ -128,6 +128,32 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
+//////////////////////////////////////////////////////////////////////////////////////////
+         ///////  talking to CouchDB using ReSTful HTTP methods.   /////////
+
+
+-(void)getAllStudents:(GetResponse)getResponse
+{
+    
+    NSURL *url = [NSURL URLWithString:@"http://studentschema.iriscouch.com/schema/_design/schema/_list/students/student"];
+    
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url];
+    
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    
+    [request setHTTPMethod:@"GET"];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *responseBody, NSData *data, NSError *error) {
+        
+        NSArray *getAll= @[data];
+        getResponse(getAll);
+        
+    }];
+    
+}
+
+
 
 
 
