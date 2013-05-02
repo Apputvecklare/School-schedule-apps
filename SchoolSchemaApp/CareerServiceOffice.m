@@ -424,9 +424,106 @@
         return NO;
         
     }
+        
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+                      /////  change schema by admin only  /////////
+
+
+-(BOOL)changeInformationOfSchedule :(SchemaOfCourse*)schema courseName:(NSString*)courseName date:(NSString*)date day:(NSString*)day klassNum:klassNum lessonTime:(NSString*)lessonTime local:( NSUInteger)local  task:(NSString*)task teacher :(NSString*)teacher week: (NSUInteger)week year:(NSUInteger)year lessonNumber:(int)lessonNumber byAdmin:(id)other  onCompletion:(postchangeSchemaResponse)changeSchemaResponse
+{
     
+    // http://studentschema.iriscouch.com/schema/_design/app/_list/schedulelistby/getscheduleby?key=["C3LENG01-13","Theresady",2]
+    
+    if ([other isAdmin]) {
+        
+        NSOperationQueue *que1 = [[NSOperationQueue alloc]init];
+        
+        NSMutableString *changeSchema = [[NSMutableString alloc] init];
+        [changeSchema appendString:@"http://studentschema.iriscouch.com/schema/_design/app/_list/schedulelistby/getscheduleby?key=%5B%22"];
+        
+        [changeSchema appendString:schema.klassNum];
+        [changeSchema appendString:@"%22"];
+        [changeSchema appendString:@"%2C"];
+        [changeSchema appendString:@"%22"];
+        [changeSchema appendString:schema.day];
+        [changeSchema appendString:@"%22"];
+        [changeSchema appendString:@"%2C"];
+        [changeSchema appendFormat:@"%lu",schema.week];
+        [changeSchema appendString:@"%5D"];
+   
+     //  Get
+        
+        NSURL *url1 = [NSURL URLWithString:changeSchema];
+        
+        NSMutableURLRequest *req= [NSMutableURLRequest requestWithURL:url1];
+        [req setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        [req setHTTPMethod:@"GET"];
+        
+        [NSURLConnection sendAsynchronousRequest:req queue:que1 completionHandler:^(NSURLResponse *responseBody, NSData *data1, NSError *error) {
+            
+            id responseEncoding = [NSJSONSerialization JSONObjectWithData:data1 options:0 error:&error];
+            
+     //       Post/update to http://studentschema.iriscouch.com/schema/ee9f3924a9a305a351ac039d98007959?rev=1-680153c2c88bdce835d621d556c307b7
+            
+            
+            NSString * docId =[[responseEncoding objectAtIndex:0 ]valueForKeyPath:@"_id"];
+            NSString * revId =[[responseEncoding objectAtIndex:0 ]valueForKeyPath:@"_rev"];
+ 
+            NSMutableString  *urlString =[[NSMutableString alloc]init];
+            [urlString appendString:@"http://studentschema.iriscouch.com/schema/"];
+            [urlString appendString:docId];
+            [urlString appendString:@"?rev="];
+            [urlString appendString:revId];
+            
+            
+            NSURL *url2 = [NSURL URLWithString:urlString];
+            NSOperationQueue *que2 = [[NSOperationQueue alloc]init];
+            
+            NSMutableURLRequest *req2 = [NSMutableURLRequest requestWithURL:url2];
+            
+            [req2 setValue:@"applicaion/json" forHTTPHeaderField:@"Accept"];
+            [req2  setHTTPMethod:@"PUT"];
+            
+            NSMutableDictionary *AsJson = [[NSMutableDictionary alloc] init];
+            AsJson[@"schemaId"] = [schema schemaId];
+            AsJson[@"week"] = @(week);
+            AsJson[@"date"] = date;
+            AsJson[@"local"] = [NSNumber numberWithInt:local];
+            AsJson[@"day"] = @"Friday";
+            AsJson[@"year"] = @(year);
+            AsJson[@"teacher"] = teacher;
+            AsJson[@"task"] = schema.task;
+            AsJson[@"lesson_time"] =lessonTime;
+            AsJson[@"course_name"] = courseName;
+            AsJson[@"klassNum"] = klassNum;
+            AsJson[@"type"] = @"course";
+            AsJson[@"lesson_Number"] = @(lessonNumber);
+            
+            
+            NSData *requestBody = [NSJSONSerialization dataWithJSONObject:AsJson options:NSJSONWritingPrettyPrinted error:NULL];
+            [req2 setHTTPBody:requestBody];
+            
+            [NSURLConnection sendAsynchronousRequest:req2 queue:que2 completionHandler:^(NSURLResponse *respons, NSData *data, NSError *error) {
+                
+                
+                changeSchemaResponse(data);
+            }];
+            
+        }];
+        
+        return YES;
+        
+    }else{
+        
+        return NO;
+
+    }
     
 }
+
+
 
 
 
