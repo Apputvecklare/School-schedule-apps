@@ -45,7 +45,7 @@ typedef void (^responseAddStudent)(BOOL resBlock);
 
 
 // staff school
--(BOOL) addUser:(SchoolPersonnel*) user onCompletion:(responseAddUser)resBlock;
+-(BOOL) addTeacher:(SchoolPersonnel*) user onCompletion:(responseAddUser)resBlock;
 
 
 -(BOOL)postSchema :(SchemaOfCourse*)schema byAdmin:(id)other onCompletion:(postSchemaResponse)getSchemaResponse;

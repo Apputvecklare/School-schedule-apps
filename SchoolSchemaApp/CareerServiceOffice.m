@@ -334,7 +334,7 @@
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
-           ////// student can see reading instructions for the week ////////
+           ////// Student can see reading instructions for the week ////////
 
 
 //http://studentschema.iriscouch.com/schema/_design/apputvecklareschema/_list/tasks/taskofweek?key=[21,"C3LJAVA03-13"]
@@ -376,6 +376,56 @@
         
         return NO;
     }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+                    /////  Post schema by admin only  /////////
+
+-(BOOL)postSchema :(SchemaOfCourse*)schema byAdmin:(id)other onCompletion:(postSchemaResponse)getSchemaResponse
+{
+    
+    if ([other isAdmin]) {
+        
+        NSOperationQueue *queue1 = [[NSOperationQueue alloc] init];
+        
+        
+        NSDictionary *dicFormat = [schema asJsonValue];
+        
+        NSData *dataRequestBody = [NSJSONSerialization dataWithJSONObject:dicFormat options:NSJSONWritingPrettyPrinted error:NULL];
+        
+        
+        
+        
+        NSURL *url = [NSURL URLWithString:@"http://studentschema.iriscouch.com/schema/"];
+        
+        
+        NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url];
+        
+        [theRequest addValue: @"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+        [theRequest setHTTPMethod:@"POST"];
+        
+        
+        [theRequest setHTTPBody:dataRequestBody];
+        
+        
+        [NSURLConnection sendAsynchronousRequest:theRequest queue:queue1 completionHandler:^(NSURLResponse *responseBody, NSData *data, NSError *error) {
+            
+            
+            getSchemaResponse(data);
+            
+            
+        }];
+        
+        return YES;
+        
+    }else{
+        
+        return NO;
+        
+    }
+    
+    
 }
 
 
