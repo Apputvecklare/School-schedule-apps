@@ -293,6 +293,92 @@
     }];
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////
+           //////student can see reading instructions for the day////////
+
+//http://studentschema.iriscouch.com/schema/_design/apputvecklareschema/_list/tasks/taskonspecificdayoftheweek?key=["Friday", 21,"C3LJAVA03-13"]
+
+
+-(void)viewTaskPerDay:(NSString*)day ofWeek:(int)week forStudent:(Student*)student ofKlass:klassNum onCompletion:(DayTaskResponse)getTaskResponses
+{
+    
+    
+    NSMutableString *taskDay = [[NSMutableString alloc] init];
+    [taskDay appendString:@"http://studentschema.iriscouch.com/schema/_design/apputvecklareschema/_list/tasks/taskonspecificdayoftheweek?key=%5B%22"];
+    NSString *dayName = day;
+    [taskDay appendString:dayName];
+    [taskDay appendString:@"%22"];
+    [taskDay appendString:@"%2C"];
+    [taskDay appendFormat:@"%d",week];
+    [taskDay appendString:@"%2C"];
+    [taskDay appendString:@"%22"];
+    [taskDay appendString:klassNum];
+    [taskDay appendString:@"%22"];
+    [taskDay appendString:@"%5D"];
+    
+    NSOperationQueue *que7 = [[NSOperationQueue alloc] init];
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithString:taskDay]];
+    
+    NSMutableURLRequest *req = [[NSMutableURLRequest alloc]initWithURL:url];
+    
+    [req setHTTPMethod:@"GET"];
+    [req setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    
+    [NSURLConnection sendAsynchronousRequest:req queue:que7 completionHandler:^(NSURLResponse *responseBody, NSData *data, NSError *error) {
+        
+        //  NSArray *getAll= @[data];
+        getTaskResponses(data);
+        
+    }];
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+           ////// student can see reading instructions for the week ////////
+
+
+//http://studentschema.iriscouch.com/schema/_design/apputvecklareschema/_list/tasks/taskofweek?key=[21,"C3LJAVA03-13"]
+
+
+-(BOOL)viewTaskPerWeek :(int)week forStudent:(Student*)student ofKlass:(NSString*)klassNum onCompletion:(WeekTaskResponse)getWeekTaskResponses
+{
+    
+    if ([repositorystudents containsObject:student]){
+        
+        NSMutableString *weeksTaskUrl = [[NSMutableString alloc] init];
+        [weeksTaskUrl appendString:@"http://studentschema.iriscouch.com/schema/_design/apputvecklareschema/_list/tasks/taskofweek?key=%5B"];
+        
+        [weeksTaskUrl appendFormat:@"%d",week];
+        [weeksTaskUrl appendString:@"%2C"];
+        [weeksTaskUrl appendString:@"%22"];
+        [weeksTaskUrl appendString:klassNum];
+        [weeksTaskUrl appendString:@"%22"];
+        [weeksTaskUrl appendString:@"%5D"];
+        
+        NSOperationQueue *queue8 = [[NSOperationQueue alloc] init];
+        
+        NSURL *url = [NSURL URLWithString:[NSString stringWithString:weeksTaskUrl]];
+        
+        NSMutableURLRequest *req = [[NSMutableURLRequest alloc]initWithURL:url];
+        
+        [req setHTTPMethod:@"GET"];
+        [req setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        
+        [NSURLConnection sendAsynchronousRequest:req queue:queue8 completionHandler:^(NSURLResponse *responseBody, NSData *data, NSError *error) {
+            
+            NSArray *getTasks = @[data];
+            getWeekTaskResponses(getTasks);
+            
+        }];
+        return YES;
+        
+    }else{
+        
+        return NO;
+    }
+}
+
+
 
 
 
