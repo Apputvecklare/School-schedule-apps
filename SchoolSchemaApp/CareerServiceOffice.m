@@ -607,14 +607,76 @@
 
 
 
+///////////////////////////////////////////////////////////////////////////////////////////
+              /////// Send message to all students  by Admin //////////
 
 
-
-
-
-
-
-
+-(BOOL) sendMessageToAllStudents:(NSString*)textMessage  byAdmin:(id)other  onCompletion:(postTextMessageResponse)getTextMessageResponse
+{
+    
+// URL: http://studentschema.iriscouch.com/schema/_design/schema/_list/students/messagetostudent
+    
+    if ([other isAdmin]) {
+        
+        NSOperationQueue *que1 = [[NSOperationQueue alloc]init];
+        NSURL *url = [NSURL URLWithString:@"http://studentschema.iriscouch.com/schema/_design/schema/_list/students/messagetostudent"];
+        
+        NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:url];
+        [req setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        [req setHTTPMethod:@"GET"];
+        [NSURLConnection sendAsynchronousRequest:req queue:que1 completionHandler:^(NSURLResponse *res, NSData *data, NSError *error) {
+            
+            id response = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
+            for (int i=0; i < [response count];i++){
+                NSString * docId =[[response objectAtIndex:i ] valueForKeyPath:@"_id"];
+                NSString * revId =[[response objectAtIndex:i ]valueForKeyPath:@"_rev"];
+                
+                NSMutableString  *urlPostChanges =[[NSMutableString alloc]init];
+                [urlPostChanges appendString:@"http://studentschema.iriscouch.com/schema/"];
+                [urlPostChanges appendString:docId];
+                [urlPostChanges appendString:@"?rev="];
+                [urlPostChanges appendString:revId];
+                
+                NSURL *url2 = [NSURL URLWithString:urlPostChanges];
+                NSOperationQueue *que2 = [[NSOperationQueue alloc]init];
+                
+                NSMutableURLRequest *req2 = [NSMutableURLRequest requestWithURL:url2];
+                
+                [req2 setValue:@"applicaion/json" forHTTPHeaderField:@"Accept"];
+                [req2  setHTTPMethod:@"PUT"];
+                
+                NSMutableDictionary *AsJsonStudent = [[NSMutableDictionary alloc] init];
+                
+                AsJsonStudent[@"studentId"] = [[response objectAtIndex:i] valueForKeyPath:@"studentId"];
+                AsJsonStudent[@"firstName"] =[[response objectAtIndex:i] valueForKeyPath:@"firstName"];
+                AsJsonStudent[@"lastName"] = [[response objectAtIndex:i] valueForKeyPath:@"lastName"];
+                AsJsonStudent[@"age"] = [[response objectAtIndex:i] valueForKeyPath:@"age"];
+                AsJsonStudent[@"type"] = @"student";
+                AsJsonStudent[@"isAdmin"] =[[response objectAtIndex:i] valueForKeyPath:@"isAdmin"];
+                AsJsonStudent[@"message"] = textMessage;
+                
+                
+                NSData *requestBody = [NSJSONSerialization dataWithJSONObject:AsJsonStudent options:NSJSONWritingPrettyPrinted error:NULL];
+                [req2 setHTTPBody:requestBody];
+                
+                [NSURLConnection sendAsynchronousRequest:req2 queue:que2 completionHandler:^(NSURLResponse *respons, NSData *data, NSError *error) {
+                    getTextMessageResponse(data);
+                    
+                }];
+                
+            }
+            
+        }];
+        
+        return YES;
+        
+    }else{
+        
+        return NO;
+        
+    }
+    
+}
 
 
 @end
