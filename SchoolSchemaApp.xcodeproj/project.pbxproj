@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A7119F8117329E7A003B7562 /* Student.m in Sources */ = {isa = PBXBuildFile; fileRef = A7119F8017329E7A003B7562 /* Student.m */; };
+		A7119F8417329EBE003B7562 /* CareerServiceOffice.m in Sources */ = {isa = PBXBuildFile; fileRef = A7119F8317329EBE003B7562 /* CareerServiceOffice.m */; };
+		A7119F8717329ED8003B7562 /* SchemaOfCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = A7119F8617329ED8003B7562 /* SchemaOfCourse.m */; };
+		A7119F8A17329EF0003B7562 /* SchoolPersonnel.m in Sources */ = {isa = PBXBuildFile; fileRef = A7119F8917329EF0003B7562 /* SchoolPersonnel.m */; };
+		A7119F9217329F3D003B7562 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7119F9117329F3D003B7562 /* SenTestingKit.framework */; };
+		A7119F9417329F3D003B7562 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7119F9317329F3D003B7562 /* Cocoa.framework */; };
+		A7119F9E17329F3D003B7562 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A7119F9C17329F3D003B7562 /* InfoPlist.strings */; };
+		A7119FA81732A014003B7562 /* SchoolServiceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A7119FA71732A014003B7562 /* SchoolServiceTest.m */; };
+		A7119FA91732A02D003B7562 /* SchoolPersonnel.m in Sources */ = {isa = PBXBuildFile; fileRef = A7119F8917329EF0003B7562 /* SchoolPersonnel.m */; };
+		A7119FAA1732A031003B7562 /* SchemaOfCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = A7119F8617329ED8003B7562 /* SchemaOfCourse.m */; };
+		A7119FAB1732A036003B7562 /* Student.m in Sources */ = {isa = PBXBuildFile; fileRef = A7119F8017329E7A003B7562 /* Student.m */; };
+		A7119FAC1732A042003B7562 /* CareerServiceOffice.m in Sources */ = {isa = PBXBuildFile; fileRef = A7119F8317329EBE003B7562 /* CareerServiceOffice.m */; };
 		A71854F317329CAF000DCBB2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A71854F217329CAF000DCBB2 /* Foundation.framework */; };
 		A71854F617329CAF000DCBB2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A71854F517329CAF000DCBB2 /* main.m */; };
 		A71854FA17329CAF000DCBB2 /* SchoolSchemaApp.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = A71854F917329CAF000DCBB2 /* SchoolSchemaApp.1 */; };
@@ -26,6 +38,25 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A7119F7F17329E7A003B7562 /* Student.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Student.h; sourceTree = "<group>"; };
+		A7119F8017329E7A003B7562 /* Student.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Student.m; sourceTree = "<group>"; };
+		A7119F8217329EBE003B7562 /* CareerServiceOffice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CareerServiceOffice.h; sourceTree = "<group>"; };
+		A7119F8317329EBE003B7562 /* CareerServiceOffice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CareerServiceOffice.m; sourceTree = "<group>"; };
+		A7119F8517329ED8003B7562 /* SchemaOfCourse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SchemaOfCourse.h; sourceTree = "<group>"; };
+		A7119F8617329ED8003B7562 /* SchemaOfCourse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SchemaOfCourse.m; sourceTree = "<group>"; };
+		A7119F8817329EF0003B7562 /* SchoolPersonnel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SchoolPersonnel.h; sourceTree = "<group>"; };
+		A7119F8917329EF0003B7562 /* SchoolPersonnel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SchoolPersonnel.m; sourceTree = "<group>"; };
+		A7119F9017329F3D003B7562 /* SchoolSchemaAppTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SchoolSchemaAppTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7119F9117329F3D003B7562 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		A7119F9317329F3D003B7562 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		A7119F9617329F3D003B7562 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		A7119F9717329F3D003B7562 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		A7119F9817329F3D003B7562 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A7119F9B17329F3D003B7562 /* SchoolSchemaAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SchoolSchemaAppTests-Info.plist"; sourceTree = "<group>"; };
+		A7119F9D17329F3D003B7562 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A7119FA217329F3D003B7562 /* SchoolSchemaAppTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SchoolSchemaAppTests-Prefix.pch"; sourceTree = "<group>"; };
+		A7119FA61732A014003B7562 /* SchoolServiceTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SchoolServiceTest.h; sourceTree = "<group>"; };
+		A7119FA71732A014003B7562 /* SchoolServiceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SchoolServiceTest.m; sourceTree = "<group>"; };
 		A71854EF17329CAF000DCBB2 /* SchoolSchemaApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SchoolSchemaApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		A71854F217329CAF000DCBB2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A71854F517329CAF000DCBB2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -34,6 +65,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A7119F8C17329F3D003B7562 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7119F9217329F3D003B7562 /* SenTestingKit.framework in Frameworks */,
+				A7119F9417329F3D003B7562 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A71854EC17329CAF000DCBB2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -45,10 +85,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A7119F9517329F3D003B7562 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A7119F9617329F3D003B7562 /* AppKit.framework */,
+				A7119F9717329F3D003B7562 /* CoreData.framework */,
+				A7119F9817329F3D003B7562 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		A7119F9917329F3D003B7562 /* SchoolSchemaAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				A7119FA61732A014003B7562 /* SchoolServiceTest.h */,
+				A7119FA71732A014003B7562 /* SchoolServiceTest.m */,
+				A7119F9A17329F3D003B7562 /* Supporting Files */,
+			);
+			path = SchoolSchemaAppTests;
+			sourceTree = "<group>";
+		};
+		A7119F9A17329F3D003B7562 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A7119F9B17329F3D003B7562 /* SchoolSchemaAppTests-Info.plist */,
+				A7119F9C17329F3D003B7562 /* InfoPlist.strings */,
+				A7119FA217329F3D003B7562 /* SchoolSchemaAppTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		A71854E617329CAF000DCBB2 = {
 			isa = PBXGroup;
 			children = (
 				A71854F417329CAF000DCBB2 /* SchoolSchemaApp */,
+				A7119F9917329F3D003B7562 /* SchoolSchemaAppTests */,
+				A71854F717329CAF000DCBB2 /* Supporting Files */,
 				A71854F117329CAF000DCBB2 /* Frameworks */,
 				A71854F017329CAF000DCBB2 /* Products */,
 			);
@@ -58,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				A71854EF17329CAF000DCBB2 /* SchoolSchemaApp */,
+				A7119F9017329F3D003B7562 /* SchoolSchemaAppTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -66,6 +139,9 @@
 			isa = PBXGroup;
 			children = (
 				A71854F217329CAF000DCBB2 /* Foundation.framework */,
+				A7119F9117329F3D003B7562 /* SenTestingKit.framework */,
+				A7119F9317329F3D003B7562 /* Cocoa.framework */,
+				A7119F9517329F3D003B7562 /* Other Frameworks */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -74,7 +150,14 @@
 			isa = PBXGroup;
 			children = (
 				A71854F517329CAF000DCBB2 /* main.m */,
-				A71854F717329CAF000DCBB2 /* Supporting Files */,
+				A7119F8817329EF0003B7562 /* SchoolPersonnel.h */,
+				A7119F8917329EF0003B7562 /* SchoolPersonnel.m */,
+				A7119F8517329ED8003B7562 /* SchemaOfCourse.h */,
+				A7119F8617329ED8003B7562 /* SchemaOfCourse.m */,
+				A7119F7F17329E7A003B7562 /* Student.h */,
+				A7119F8017329E7A003B7562 /* Student.m */,
+				A7119F8217329EBE003B7562 /* CareerServiceOffice.h */,
+				A7119F8317329EBE003B7562 /* CareerServiceOffice.m */,
 			);
 			path = SchoolSchemaApp;
 			sourceTree = "<group>";
@@ -86,11 +169,30 @@
 				A71854F817329CAF000DCBB2 /* SchoolSchemaApp-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			path = SchoolSchemaApp;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		A7119F8F17329F3D003B7562 /* SchoolSchemaAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A7119FA317329F3D003B7562 /* Build configuration list for PBXNativeTarget "SchoolSchemaAppTests" */;
+			buildPhases = (
+				A7119F8B17329F3D003B7562 /* Sources */,
+				A7119F8C17329F3D003B7562 /* Frameworks */,
+				A7119F8D17329F3D003B7562 /* Resources */,
+				A7119F8E17329F3D003B7562 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SchoolSchemaAppTests;
+			productName = SchoolSchemaAppTests;
+			productReference = A7119F9017329F3D003B7562 /* SchoolSchemaAppTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		A71854EE17329CAF000DCBB2 /* SchoolSchemaApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A71854FD17329CAF000DCBB2 /* Build configuration list for PBXNativeTarget "SchoolSchemaApp" */;
@@ -130,22 +232,103 @@
 			projectRoot = "";
 			targets = (
 				A71854EE17329CAF000DCBB2 /* SchoolSchemaApp */,
+				A7119F8F17329F3D003B7562 /* SchoolSchemaAppTests */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		A7119F8D17329F3D003B7562 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7119F9E17329F3D003B7562 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A7119F8E17329F3D003B7562 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		A7119F8B17329F3D003B7562 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7119FA81732A014003B7562 /* SchoolServiceTest.m in Sources */,
+				A7119FA91732A02D003B7562 /* SchoolPersonnel.m in Sources */,
+				A7119FAA1732A031003B7562 /* SchemaOfCourse.m in Sources */,
+				A7119FAB1732A036003B7562 /* Student.m in Sources */,
+				A7119FAC1732A042003B7562 /* CareerServiceOffice.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A71854EB17329CAF000DCBB2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				A71854F617329CAF000DCBB2 /* main.m in Sources */,
+				A7119F8117329E7A003B7562 /* Student.m in Sources */,
+				A7119F8417329EBE003B7562 /* CareerServiceOffice.m in Sources */,
+				A7119F8717329ED8003B7562 /* SchemaOfCourse.m in Sources */,
+				A7119F8A17329EF0003B7562 /* SchoolPersonnel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXVariantGroup section */
+		A7119F9C17329F3D003B7562 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A7119F9D17329F3D003B7562 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		A7119FA417329F3D003B7562 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SchoolSchemaAppTests/SchoolSchemaAppTests-Prefix.pch";
+				INFOPLIST_FILE = "SchoolSchemaAppTests/SchoolSchemaAppTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		A7119FA517329F3D003B7562 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SchoolSchemaAppTests/SchoolSchemaAppTests-Prefix.pch";
+				INFOPLIST_FILE = "SchoolSchemaAppTests/SchoolSchemaAppTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 		A71854FB17329CAF000DCBB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -226,6 +409,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A7119FA317329F3D003B7562 /* Build configuration list for PBXNativeTarget "SchoolSchemaAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7119FA417329F3D003B7562 /* Debug */,
+				A7119FA517329F3D003B7562 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		A71854EA17329CAF000DCBB2 /* Build configuration list for PBXProject "SchoolSchemaApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -242,6 +433,7 @@
 				A71854FF17329CAF000DCBB2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
