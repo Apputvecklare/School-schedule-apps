@@ -131,7 +131,7 @@
     NSURL *url = [NSURL URLWithString:@"http://studentschema.iriscouch.com/schema/_design/schema/_list/students/student"];
     
     
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:60.0];
     
     [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     
@@ -178,34 +178,40 @@
     
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////
                 ///////////////  Post Student to DB  /////////////////
 
--(void)postStudent : (Student*)student onCompletion:(PostResponse)postResponse
+-(BOOL)postStudent : (Student*)student onCompletion:(PostResponse)postResponse
 {
-    NSOperationQueue *queue1 = [[NSOperationQueue alloc] init];
+  if (![repositorystudents containsObject:student]){
+      
+     NSOperationQueue *queue1 = [[NSOperationQueue alloc] init];
     
-    NSDictionary *dicFormatStudent = [self serializeStudentToJson:student];
+     NSDictionary *dicFormatStudent = [self serializeStudentToJson:student];
     
-    NSData *dataRequestBody = [NSJSONSerialization dataWithJSONObject:dicFormatStudent options:NSJSONWritingPrettyPrinted error:NULL];
+     NSData *dataRequestBody = [NSJSONSerialization dataWithJSONObject:dicFormatStudent options:NSJSONWritingPrettyPrinted error:NULL];
 
-    NSURL *url = [NSURL URLWithString:@"http://studentschema.iriscouch.com/schema/"];
+     NSURL *url = [NSURL URLWithString:@"http://studentschema.iriscouch.com/schema/"];
     
-    NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url];
+     NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url];
     
-    [theRequest addValue: @"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
-    [theRequest setHTTPMethod:@"POST"];
+     [theRequest addValue: @"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+     [theRequest setHTTPMethod:@"POST"];
     
-    [theRequest setHTTPBody:dataRequestBody];
+     [theRequest setHTTPBody:dataRequestBody];
     
-    [NSURLConnection sendAsynchronousRequest:theRequest queue:queue1 completionHandler:^(NSURLResponse *responseBody, NSData *data, NSError *error) {
+     [NSURLConnection sendAsynchronousRequest:theRequest queue:queue1 completionHandler:^(NSURLResponse *responseBody, NSData *data, NSError *error) {
         
         
         postResponse(data);
         
         
-    }];
-    
+     }];
+      return YES;
+  }else{
+      return NO;
+  }
 }   
 
 
@@ -532,7 +538,7 @@
         
         NSURL *url = [NSURL URLWithString:urlGetSudent];
         
-        NSMutableURLRequest *newReq= [NSMutableURLRequest requestWithURL:url];
+        NSMutableURLRequest *newReq= [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:20.0];
         [newReq setHTTPMethod:@"GET"];
         [newReq setValue:@"application/json" forHTTPHeaderField:@"Accept"];
         

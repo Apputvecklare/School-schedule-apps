@@ -50,7 +50,7 @@ typedef void (^responseAddStudent)(BOOL resBlock);
 //http methods:
 
 -(void)getAllStudents:(GetResponse)response;
--(void)postStudent : (Student*)student onCompletion:(PostResponse)postResponse;
+-(BOOL)postStudent : (Student*)student onCompletion:(PostResponse)postResponse;
 -(void)getStudent : (Student*)student onCompletion:(GetStudentResponse)getResponse;
 -(void)viewSchemaPerDay :(NSString*)day ofWeek:(int)week ofKlass:(NSString*)klassNum forStudent:(Student*)student onCompletion:(DaySchemaResponse)getDaySchemaResponses;
 -(void)viewSchemaPerWeek :(int)week ofKlass:(NSString*)klassNum forStudent:(Student*)student onCompletion:(WeekSchemaResponse)getWeekSchemaResponses;
