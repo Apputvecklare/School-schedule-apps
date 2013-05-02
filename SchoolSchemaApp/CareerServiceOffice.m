@@ -192,29 +192,18 @@
 {
     NSOperationQueue *queue1 = [[NSOperationQueue alloc] init];
     
-    //1-
-    
-    // NSDictionary *dicFormatStudent =[student asJsonValue];
     NSDictionary *dicFormatStudent = [self serializeStudentToJson:student];
     
-    
-    //2-
     NSData *dataRequestBody = [NSJSONSerialization dataWithJSONObject:dicFormatStudent options:NSJSONWritingPrettyPrinted error:NULL];
-    
-    
-    
-    //3-
+
     NSURL *url = [NSURL URLWithString:@"http://studentschema.iriscouch.com/schema/"];
     
-    //4-
     NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url];
     
     [theRequest addValue: @"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     [theRequest setHTTPMethod:@"POST"];
     
     [theRequest setHTTPBody:dataRequestBody];
-    
-    //5-
     
     [NSURLConnection sendAsynchronousRequest:theRequest queue:queue1 completionHandler:^(NSURLResponse *responseBody, NSData *data, NSError *error) {
         
