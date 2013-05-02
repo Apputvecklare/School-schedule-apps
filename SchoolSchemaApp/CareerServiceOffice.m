@@ -525,6 +525,89 @@
 
 
 
+///////////////////////////////////////////////////////////////////////////////////////////
+          ///// Add message to a particular student by admin only /////////
+
+
+//URL: http://studentschema.iriscouch.com/schema/_design/schema/_list/students/messagetostudent?key="zoe"
+
+-(BOOL) sendTextMessage:(NSString*)message toStudent:(Student*)student byAdmin:(id)other onCompletion:(postMessageResponse)getMessageResponse
+
+{
+    
+    if ([other isAdmin]) {
+        
+        NSOperationQueue *queue1 = [[NSOperationQueue alloc]init];
+        
+        NSMutableString *urlGetSudent = [[NSMutableString alloc] init];
+        [urlGetSudent  appendString:@"http://studentschema.iriscouch.com/schema/_design/schema/_list/students/messagetostudent?key=%22"];
+        
+        [urlGetSudent appendString:student.firstName];
+        [urlGetSudent appendString:@"%22"];
+        
+        NSURL *url = [NSURL URLWithString:urlGetSudent];
+        
+        NSMutableURLRequest *newReq= [NSMutableURLRequest requestWithURL:url];
+        [newReq setHTTPMethod:@"GET"];
+        [newReq setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        
+        [NSURLConnection sendAsynchronousRequest:newReq queue:queue1 completionHandler:^(NSURLResponse *responseBody, NSData *NewData, NSError *error) {
+            
+            
+            id jsonResponse = [NSJSONSerialization JSONObjectWithData:NewData options:0 error:&error];
+            NSString * docId =[[jsonResponse objectAtIndex:0 ] valueForKeyPath:@"_id"];
+            NSString * revId =[[jsonResponse objectAtIndex:0 ] valueForKeyPath:@"_rev"];
+            
+            NSMutableString  *urlPostChanges =[[NSMutableString alloc]init];
+            [urlPostChanges appendString:@"http://studentschema.iriscouch.com/schema/"];
+            [urlPostChanges appendString:docId];
+            [urlPostChanges appendString:@"?rev="];
+            [urlPostChanges appendString:revId];
+            
+            NSURL *url2 = [NSURL URLWithString:urlPostChanges];
+            NSOperationQueue *que2 = [[NSOperationQueue alloc]init];
+            
+            NSMutableURLRequest *req2 = [NSMutableURLRequest requestWithURL:url2];
+            
+            [req2 setValue:@"applicaion/json" forHTTPHeaderField:@"Accept"];
+            [req2  setHTTPMethod:@"PUT"];
+            
+            NSMutableDictionary *AsJson = [[NSMutableDictionary alloc] init];
+            
+            AsJson[@"studentId"] = student.studentId;
+            AsJson[@"firstName"] = student.firstName;
+            AsJson[@"lastName"] = student.lastName;
+            AsJson[@"age"] = @(student.age);
+            AsJson[@"type"] = @"student";
+            AsJson[@"isAdmin"] = @(student.admin);
+            AsJson[@"message"] = message;
+            
+            
+            NSData *requestBody = [NSJSONSerialization dataWithJSONObject:AsJson options:NSJSONWritingPrettyPrinted error:NULL];
+            [req2 setHTTPBody:requestBody];
+            
+            [NSURLConnection sendAsynchronousRequest:req2 queue:que2 completionHandler:^(NSURLResponse *respons, NSData *data, NSError *error) {
+                
+                NSString *str = @"Message sended to a particular student successfully";
+                getMessageResponse(str);
+                
+            }];
+            
+        }];
+        
+        return YES;
+        
+    }else{
+        
+        return NO;
+        
+    }
+    
+}
+
+
+
+
 
 
 
