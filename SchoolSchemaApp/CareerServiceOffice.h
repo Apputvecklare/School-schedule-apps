@@ -35,10 +35,6 @@ typedef void (^responseAddStudent)(BOOL resBlock);
 -(BOOL)addStudent : (Student*)student onCompletion:(responseAddStudent)resBlock;
 
 
-
--(BOOL)removeStudent :(Student*)student;
-
-
 //schema methods
 
 -(BOOL)addSchema:(SchemaOfCourse*) schema onCompletion:(responseAddSchema)resBlock;
@@ -48,7 +44,7 @@ typedef void (^responseAddStudent)(BOOL resBlock);
 -(BOOL) addTeacher:(SchoolPersonnel*) user onCompletion:(responseAddUser)resBlock;
 
 
--(BOOL)postSchema :(SchemaOfCourse*)schema byAdmin:(id)other onCompletion:(postSchemaResponse)getSchemaResponse;
+
 
 
 //http methods:
@@ -60,12 +56,8 @@ typedef void (^responseAddStudent)(BOOL resBlock);
 -(void)viewSchemaPerWeek :(int)week ofKlass:(NSString*)klassNum forStudent:(Student*)student onCompletion:(WeekSchemaResponse)getWeekSchemaResponses;
 -(void)viewTaskPerDay :(NSString*)day ofWeek:(int)week forStudent:(Student*)student ofKlass:(NSString*)klassNum onCompletion:(DayTaskResponse)getTaskResponses;
 -(BOOL)viewTaskPerWeek :(int)week forStudent:(Student*)student ofKlass:(NSString*)klassNum onCompletion:(WeekTaskResponse)getWeekTaskResponses;
-
-
-
+-(BOOL)postSchema :(SchemaOfCourse*)schema byAdmin:(id)other onCompletion:(postSchemaResponse)getSchemaResponse;
 -(BOOL)changeInformationOfSchedule :(SchemaOfCourse*)schema courseName:(NSString*)courseName date:(NSString*)date day:(NSString*)day klassNum:klassNum lessonTime:(NSString*)lessonTime local:( NSUInteger)local  task:(NSString*)task teacher :(NSString*)teacher week: (NSUInteger)week year:(NSUInteger)year lessonNumber:(int)lessonNumber byAdmin:(id)other  onCompletion:(postchangeSchemaResponse)changeSchemaResponse;
-
-
 -(BOOL) sendTextMessage:(NSString*)message toStudent:(Student*)student byAdmin:(id)other onCompletion:(postMessageResponse)getMessageResponse;
 
 -(BOOL)sendMessageToAllStudents:(NSString*)textMessage  byAdmin:(id) Admin  onCompletion:(postTextMessageResponse)getTextMessageResponse;

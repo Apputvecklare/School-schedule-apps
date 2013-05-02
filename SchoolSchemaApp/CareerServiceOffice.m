@@ -22,7 +22,7 @@
     NSOperationQueue *queue;
     
 }
-
+#pragma - Init methods
 - (id)init
 {
     return [self initWithStudents:@[]];
@@ -49,12 +49,12 @@
     }
     
     return self;
-    
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////////////////
-//////////////////    schema del    ///////////////////////////
+            //////////////////    schema del    ///////////////////////////
+
+#pragma - Add student/teacher/schema to local repository(s)
 
 -(BOOL)addSchema:(SchemaOfCourse*)schema onCompletion:(responseAddSchema)resBlock
 
@@ -66,12 +66,9 @@
         [repositorySchema addObject:schema];
         resBlock(YES);
         return YES;
-        
     }
     resBlock(NO);
     return NO;
-    
-    
 }
 
 
@@ -85,15 +82,10 @@
         [repositoryTeacherStaff addObject:user];
         resBlock(YES);
         return YES;
-        
     }
-    
     resBlock(NO);
     return NO;
-    
-    
 }
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 
@@ -112,9 +104,9 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////
+                         ////// helper method ///////
 
-
-//helper method
+#pragma - helper method
 
 -(NSDictionary*) serializeStudentToJson:(id) object
 {
@@ -131,7 +123,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////
          ///////  talking to CouchDB using ReSTful HTTP methods.   /////////
 
-
+#pragma - Get/Post student methods
 -(void)getAllStudents:(GetResponse)getResponse
 {
     
@@ -219,7 +211,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////
 ///////////////  a student can see his schedule for the day  ////////////////
 
-//http://studentschema.iriscouch.com/schema/_design/apputvecklareschema/_list/days/daysoftheweek?key=["Friday",18,"C3LJAVA03-13"]
+//Url http://studentschema.iriscouch.com/schema/_design/apputvecklareschema/_list/days/daysoftheweek?key=["Friday",18,"C3LJAVA03-13"]
 
 
 
@@ -262,7 +254,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////// 
                //////// a student can see his schedule for the week  ///////
 
-//http://studentschema.iriscouch.com/schema/_design/apputvecklareschema/_list/weeks/week?key=[18,"C3LJAVA03-13"]
+//Url http://studentschema.iriscouch.com/schema/_design/apputvecklareschema/_list/weeks/week?key=[18,"C3LJAVA03-13"]
 
 -(void)viewSchemaPerWeek :(int)week ofKlass:(NSString*)klassNum forStudent:(Student*)student onCompletion:(DaySchemaResponse)getDaySchemaResponses
 {
@@ -296,7 +288,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////
            //////student can see reading instructions for the day////////
 
-//http://studentschema.iriscouch.com/schema/_design/apputvecklareschema/_list/tasks/taskonspecificdayoftheweek?key=["Friday", 21,"C3LJAVA03-13"]
+//Url http://studentschema.iriscouch.com/schema/_design/apputvecklareschema/_list/tasks/taskonspecificdayoftheweek?key=["Friday", 21,"C3LJAVA03-13"]
 
 
 -(void)viewTaskPerDay:(NSString*)day ofWeek:(int)week forStudent:(Student*)student ofKlass:klassNum onCompletion:(DayTaskResponse)getTaskResponses
@@ -327,7 +319,6 @@
     
     [NSURLConnection sendAsynchronousRequest:req queue:que7 completionHandler:^(NSURLResponse *responseBody, NSData *data, NSError *error) {
         
-        //  NSArray *getAll= @[data];
         getTaskResponses(data);
         
     }];
@@ -337,7 +328,7 @@
            ////// Student can see reading instructions for the week ////////
 
 
-//http://studentschema.iriscouch.com/schema/_design/apputvecklareschema/_list/tasks/taskofweek?key=[21,"C3LJAVA03-13"]
+//Url http://studentschema.iriscouch.com/schema/_design/apputvecklareschema/_list/tasks/taskofweek?key=[21,"C3LJAVA03-13"]
 
 
 -(BOOL)viewTaskPerWeek :(int)week forStudent:(Student*)student ofKlass:(NSString*)klassNum onCompletion:(WeekTaskResponse)getWeekTaskResponses
@@ -381,6 +372,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////
                     /////  Post schema by admin only  /////////
+#pragma - Get/Post/Update schema methods
 
 -(BOOL)postSchema :(SchemaOfCourse*)schema byAdmin:(id)other onCompletion:(postSchemaResponse)getSchemaResponse
 {
@@ -434,7 +426,7 @@
 -(BOOL)changeInformationOfSchedule :(SchemaOfCourse*)schema courseName:(NSString*)courseName date:(NSString*)date day:(NSString*)day klassNum:klassNum lessonTime:(NSString*)lessonTime local:( NSUInteger)local  task:(NSString*)task teacher :(NSString*)teacher week: (NSUInteger)week year:(NSUInteger)year lessonNumber:(int)lessonNumber byAdmin:(id)other  onCompletion:(postchangeSchemaResponse)changeSchemaResponse
 {
     
-    // http://studentschema.iriscouch.com/schema/_design/app/_list/schedulelistby/getscheduleby?key=["C3LENG01-13","Theresady",2]
+    // Url  http://studentschema.iriscouch.com/schema/_design/app/_list/schedulelistby/getscheduleby?key=["C3LENG01-13","Theresady",2]
     
     if ([other isAdmin]) {
         
@@ -453,7 +445,7 @@
         [changeSchema appendFormat:@"%lu",schema.week];
         [changeSchema appendString:@"%5D"];
    
-     //  Get
+     //  Get method
         
         NSURL *url1 = [NSURL URLWithString:changeSchema];
         
@@ -465,7 +457,7 @@
             
             id responseEncoding = [NSJSONSerialization JSONObjectWithData:data1 options:0 error:&error];
             
-     //       Post/update to http://studentschema.iriscouch.com/schema/ee9f3924a9a305a351ac039d98007959?rev=1-680153c2c88bdce835d621d556c307b7
+     // Url   http://studentschema.iriscouch.com/schema/ee9f3924a9a305a351ac039d98007959?rev=1-680153c2c88bdce835d621d556c307b7
             
             
             NSString * docId =[[responseEncoding objectAtIndex:0 ]valueForKeyPath:@"_id"];
@@ -529,7 +521,7 @@
           ///// Add message to a particular student by admin only /////////
 
 
-//URL: http://studentschema.iriscouch.com/schema/_design/schema/_list/students/messagetostudent?key="zoe"
+//Url http://studentschema.iriscouch.com/schema/_design/schema/_list/students/messagetostudent?key="zoe"
 
 -(BOOL) sendTextMessage:(NSString*)message toStudent:(Student*)student byAdmin:(id)other onCompletion:(postMessageResponse)getMessageResponse
 
@@ -563,6 +555,8 @@
             [urlPostChanges appendString:docId];
             [urlPostChanges appendString:@"?rev="];
             [urlPostChanges appendString:revId];
+            
+    // Put method
             
             NSURL *url2 = [NSURL URLWithString:urlPostChanges];
             NSOperationQueue *que2 = [[NSOperationQueue alloc]init];
@@ -614,7 +608,7 @@
 -(BOOL) sendMessageToAllStudents:(NSString*)textMessage  byAdmin:(id)other  onCompletion:(postTextMessageResponse)getTextMessageResponse
 {
     
-// URL: http://studentschema.iriscouch.com/schema/_design/schema/_list/students/messagetostudent
+// Url http://studentschema.iriscouch.com/schema/_design/schema/_list/students/messagetostudent
     
     if ([other isAdmin]) {
         
@@ -636,7 +630,7 @@
                 [urlPostChanges appendString:docId];
                 [urlPostChanges appendString:@"?rev="];
                 [urlPostChanges appendString:revId];
-                
+        // Put method         
                 NSURL *url2 = [NSURL URLWithString:urlPostChanges];
                 NSOperationQueue *que2 = [[NSOperationQueue alloc]init];
                 
