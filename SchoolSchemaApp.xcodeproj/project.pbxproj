@@ -74,7 +74,6 @@
 			isa = PBXGroup;
 			children = (
 				A71854F517329CAF000DCBB2 /* main.m */,
-				A71854F917329CAF000DCBB2 /* SchoolSchemaApp.1 */,
 				A71854F717329CAF000DCBB2 /* Supporting Files */,
 			);
 			path = SchoolSchemaApp;
@@ -83,6 +82,7 @@
 		A71854F717329CAF000DCBB2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A71854F917329CAF000DCBB2 /* SchoolSchemaApp.1 */,
 				A71854F817329CAF000DCBB2 /* SchoolSchemaApp-Prefix.pch */,
 			);
 			name = "Supporting Files";
