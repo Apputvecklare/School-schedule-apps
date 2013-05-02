@@ -22,7 +22,8 @@
     NSOperationQueue *queue;
     
 }
-#pragma - Init methods
+#pragma mark - Init
+
 - (id)init
 {
     return [self initWithStudents:@[]];
@@ -54,7 +55,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////
             //////////////////    schema del    ///////////////////////////
 
-#pragma - Add student/teacher/schema to local repository(s)
+#pragma mark - Add student/teacher/schema to local repository(s)
 
 -(BOOL)addSchema:(SchemaOfCourse*)schema onCompletion:(responseAddSchema)resBlock
 
@@ -106,7 +107,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////
                          ////// helper method ///////
 
-#pragma - helper method
+#pragma mark - helper method
 
 -(NSDictionary*) serializeStudentToJson:(id) object
 {
@@ -123,7 +124,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////
          ///////  talking to CouchDB using ReSTful HTTP methods.   /////////
 
-#pragma - Get/Post student methods
+#pragma mark - Get/Post student methods
 -(void)getAllStudents:(GetResponse)getResponse
 {
     
@@ -372,7 +373,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////
                     /////  Post schema by admin only  /////////
-#pragma - Get/Post/Update schema methods
+#pragma mark - Get/Post/Update schema methods
 
 -(BOOL)postSchema :(SchemaOfCourse*)schema byAdmin:(id)other onCompletion:(postSchemaResponse)getSchemaResponse
 {
@@ -386,20 +387,14 @@
         
         NSData *dataRequestBody = [NSJSONSerialization dataWithJSONObject:dicFormat options:NSJSONWritingPrettyPrinted error:NULL];
         
-        
-        
-        
         NSURL *url = [NSURL URLWithString:@"http://studentschema.iriscouch.com/schema/"];
-        
         
         NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url];
         
         [theRequest addValue: @"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
         [theRequest setHTTPMethod:@"POST"];
         
-        
         [theRequest setHTTPBody:dataRequestBody];
-        
         
         [NSURLConnection sendAsynchronousRequest:theRequest queue:queue1 completionHandler:^(NSURLResponse *responseBody, NSData *data, NSError *error) {
             
@@ -469,7 +464,6 @@
             [urlString appendString:@"?rev="];
             [urlString appendString:revId];
             
-            
             NSURL *url2 = [NSURL URLWithString:urlString];
             NSOperationQueue *que2 = [[NSOperationQueue alloc]init];
             
@@ -492,7 +486,6 @@
             AsJson[@"klassNum"] = klassNum;
             AsJson[@"type"] = @"course";
             AsJson[@"lesson_Number"] = @(lessonNumber);
-            
             
             NSData *requestBody = [NSJSONSerialization dataWithJSONObject:AsJson options:NSJSONWritingPrettyPrinted error:NULL];
             [req2 setHTTPBody:requestBody];
