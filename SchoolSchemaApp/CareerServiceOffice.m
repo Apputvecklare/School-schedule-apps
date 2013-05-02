@@ -114,7 +114,19 @@
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 
+//helper method
 
+-(NSDictionary*) serializeStudentToJson:(id) object
+{
+    NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
+    
+    [result setDictionary:[object asJsonValue]];
+    
+    
+    return result;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
 
 
 
