@@ -215,7 +215,84 @@
     
 }   
 
-///////////////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////////
+///////////////  a student can see his schedule for the day  ////////////////
+
+//http://studentschema.iriscouch.com/schema/_design/apputvecklareschema/_list/days/daysoftheweek?key=["Friday",18,"C3LJAVA03-13"]
+
+
+
+-(void)viewSchemaPerDay :(NSString*)day ofWeek:(int)week ofKlass:(NSString*)klassNum forStudent:(Student*)student onCompletion:(DaySchemaResponse)getDaySchemaResponses
+{
+    
+    
+    NSMutableString *dayUrlSchema = [[NSMutableString alloc] init];
+    [dayUrlSchema appendString:@"http://studentschema.iriscouch.com/schema/_design/apputvecklareschema/_list/days/daysoftheweek?key=%5B%22"];
+    NSString *dayName = day;
+    [dayUrlSchema appendString:dayName];
+    [dayUrlSchema appendString:@"%22"];
+    [dayUrlSchema appendString:@"%2C"];
+    
+    [dayUrlSchema appendFormat:@"%d",week];
+    
+    [dayUrlSchema appendString:@"%2C"];
+    [dayUrlSchema appendString:@"%22"];
+    [dayUrlSchema appendFormat:@"%@",klassNum];
+    [dayUrlSchema appendString:@"%22"];
+    [dayUrlSchema appendString:@"%5D"];
+    
+    NSOperationQueue *queue5 = [[NSOperationQueue alloc] init];
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithString:dayUrlSchema]];
+    
+    NSMutableURLRequest *req = [[NSMutableURLRequest alloc]initWithURL:url];
+    
+    [req setHTTPMethod:@"GET"];
+    [req setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    
+    [NSURLConnection sendAsynchronousRequest:req queue:queue5 completionHandler:^(NSURLResponse *responseBody, NSData *data, NSError *error) {
+        
+        getDaySchemaResponses(data);
+        
+    }];
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////// 
+               //////// a student can see his schedule for the week  ///////
+
+//http://studentschema.iriscouch.com/schema/_design/apputvecklareschema/_list/weeks/week?key=[18,"C3LJAVA03-13"]
+
+-(void)viewSchemaPerWeek :(int)week ofKlass:(NSString*)klassNum forStudent:(Student*)student onCompletion:(DaySchemaResponse)getDaySchemaResponses
+{
+    
+    NSMutableString *weekUrlSchema = [[NSMutableString alloc] init];
+    [weekUrlSchema appendString:@"http://studentschema.iriscouch.com/schema/_design/apputvecklareschema/_list/weeks/week?key=%5B"];
+    
+    [weekUrlSchema appendFormat:@"%d",week];
+    [weekUrlSchema appendString:@"%2C"];
+    [weekUrlSchema appendString:@"%22"];
+    [weekUrlSchema appendFormat:@"%@",klassNum];
+    [weekUrlSchema appendString:@"%22"];
+    [weekUrlSchema appendString:@"%5D"];
+    
+    NSOperationQueue *queue6 = [[NSOperationQueue alloc] init];
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithString:weekUrlSchema]];
+    
+    NSMutableURLRequest *req = [[NSMutableURLRequest alloc]initWithURL:url];
+    
+    [req setHTTPMethod:@"GET"];
+    [req setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    
+    [NSURLConnection sendAsynchronousRequest:req queue:queue6 completionHandler:^(NSURLResponse *responseBody, NSData *data, NSError *error) {
+        
+        getDaySchemaResponses(data);
+        
+    }];
+}
+
 
 
 
