@@ -153,6 +153,38 @@
     
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////
+               ////////////  get student details  from DB  ////////////////
+
+-(void)getStudent:(Student *)student onCompletion:(GetStudentResponse)getResponse
+{
+    
+    NSMutableString *studentUrlName = [[NSMutableString alloc] init];
+    [studentUrlName appendString:@"http://studentschema.iriscouch.com/schema/_design/schema/_list/students/student?key=%22"];
+    NSString *studentFirstName = student.firstName;
+    [studentUrlName appendString:studentFirstName];
+    [studentUrlName appendString:@"%22"];
+    
+    NSOperationQueue *queue4 = [[NSOperationQueue alloc] init];
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithString:studentUrlName]];
+    
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url];
+    
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPMethod:@"GET"];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:queue4 completionHandler:^(NSURLResponse *responseBody, NSData *data, NSError *error) {
+        
+        getResponse(data);
+        
+    }];
+    
+    
+}
+
 
 
 
