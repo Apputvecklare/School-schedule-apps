@@ -32,7 +32,7 @@ typedef void (^responseAddStudent)(BOOL resBlock);
 -(id) initWithStudents:(NSArray*) studentsToAdd;
 
 
--(BOOL)addStudent : (Student*)student onCompletion:(responseAddStudent)resBlock;
+-(BOOL)addStudent : (Student*)student;
 
 
 //schema methods
@@ -51,7 +51,7 @@ typedef void (^responseAddStudent)(BOOL resBlock);
 
 -(void)getAllStudents:(GetResponse)response;
 -(BOOL)postStudent : (Student*)student onCompletion:(PostResponse)postResponse;
--(void)getStudent : (Student*)student onCompletion:(GetStudentResponse)getResponse;
+-(BOOL)getStudent : (Student*)student onCompletion:(GetStudentResponse)getResponse;
 -(void)viewSchemaPerDay :(NSString*)day ofWeek:(int)week ofKlass:(NSString*)klassNum forStudent:(Student*)student onCompletion:(DaySchemaResponse)getDaySchemaResponses;
 -(void)viewSchemaPerWeek :(int)week ofKlass:(NSString*)klassNum forStudent:(Student*)student onCompletion:(WeekSchemaResponse)getWeekSchemaResponses;
 -(void)viewTaskPerDay :(NSString*)day ofWeek:(int)week forStudent:(Student*)student ofKlass:(NSString*)klassNum onCompletion:(DayTaskResponse)getTaskResponses;

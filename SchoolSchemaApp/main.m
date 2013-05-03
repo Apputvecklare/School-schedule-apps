@@ -21,44 +21,28 @@ int main(int argc, const char * argv[])
         
         CareerServiceOffice *service = [[CareerServiceOffice alloc] init];
         Student *zoe = [[Student alloc]initWithStudentFirstName:@"zoe" lastName:@"Eriksson" age:27 isAdmin:NO];
-        Student *gustaf= [[Student alloc]initWithStudentFirstName:@"gustaf" lastName:@"cvenssson" age:28 isAdmin:NO];
-    
         
         SchoolPersonnel *Pablo = [[SchoolPersonnel alloc]initWithSchoolPersonnelFirstName:@"Pablo" lastName:@"Win" role:@"Director" isAdmin:YES];
         
 ///////////////////////////////////////////////////////////////////////////////////////////
         // Student //
         
-        [service addStudent:zoe onCompletion:^(BOOL resBlock) {
-            if (resBlock){
-                NSLog(@"Success,student is added to class!\n ");
-            }else{
-                NSLog(@"This student is already exists!");
-            }
-            
-        }];
+        [service addStudent:zoe ];
         
         
-        [service postStudent:zoe onCompletion:^(NSData *postResponses) {
+        BOOL checkpost= [service postStudent:zoe onCompletion:^(NSData *postResponses) {
             NSString *dataencoding = [[NSString alloc] initWithData:postResponses  encoding:NSUTF8StringEncoding];
             NSLog(@"Student is added to database :%@\n",dataencoding);
         }];
-        
-        [service addStudent:gustaf onCompletion:^(BOOL resBlock) {
-            if (resBlock){
-                NSLog(@"Success,student is added to class!\n ");
-            }else{
-                NSLog(@"This student is already exists!");
-            }
-            
-        }];
+        if (!checkpost){
+            NSLog(@"failed to post,this student is already exists in Db ");
+        }else{
+            NSLog(@"Student is added to database!");
+        }
         
         
-        [service postStudent:gustaf onCompletion:^(NSData *postResponses) {
-            NSString *dataencoding = [[NSString alloc] initWithData:postResponses  encoding:NSUTF8StringEncoding];
-            NSLog(@"Student is added to database :%@\n",dataencoding);
-        }];
         
+    
         [service addTeacher:Pablo onCompletion:^(BOOL resBlock) {
             if (resBlock){
                 NSLog(@"Success,new SchoolPersonnel added!\n ");

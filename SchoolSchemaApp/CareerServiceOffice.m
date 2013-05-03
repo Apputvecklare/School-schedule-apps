@@ -42,9 +42,9 @@
         
         // Add all students
         for(Student *student in studentsToAdd) {
-            [self addStudent:student onCompletion:^(BOOL resBlock) {
+            [self addStudent:student];
                 
-            }];
+           
         }
         queue = [[NSOperationQueue alloc]init];
     }
@@ -91,15 +91,13 @@
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 
--(BOOL)addStudent : (Student*)student onCompletion:(responseAddStudent)resBlock{
+-(BOOL)addStudent : (Student*)student{
     
     if([repositorystudents containsObject:student.studentId])
     {
-        resBlock(NO);
         return NO;
     }
     [repositorystudents addObject:student];
-    resBlock(YES);
     return YES;
 }
 
@@ -149,32 +147,36 @@
 //////////////////////////////////////////////////////////////////////////////////////////
                ////////////  get student details  from DB  ////////////////
 
--(void)getStudent:(Student *)student onCompletion:(GetStudentResponse)getResponse
+-(BOOL)getStudent:(Student *)student onCompletion:(GetStudentResponse)getResponse
 {
-    
-    NSMutableString *studentUrlName = [[NSMutableString alloc] init];
-    [studentUrlName appendString:@"http://studentschema.iriscouch.com/schema/_design/schema/_list/students/student?key=%22"];
-    NSString *studentFirstName = student.firstName;
-    [studentUrlName appendString:studentFirstName];
-    [studentUrlName appendString:@"%22"];
-    
-    NSOperationQueue *queue4 = [[NSOperationQueue alloc] init];
-    
-    NSURL *url = [NSURL URLWithString:[NSString stringWithString:studentUrlName]];
-    
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url];
-    
-    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request setHTTPMethod:@"GET"];
-    
-    [NSURLConnection sendAsynchronousRequest:request queue:queue4 completionHandler:^(NSURLResponse *responseBody, NSData *data, NSError *error) {
+    if ([repositorystudents containsObject:student]){
         
-        getResponse(data);
+        NSMutableString *studentUrlName = [[NSMutableString alloc] init];
+        [studentUrlName appendString:@"http://studentschema.iriscouch.com/schema/_design/schema/_list/students/student?key=%22"];
+        NSString *studentFirstName = student.firstName;
+        [studentUrlName appendString:studentFirstName];
+        [studentUrlName appendString:@"%22"];
         
-    }];
-    
+        NSOperationQueue *queue4 = [[NSOperationQueue alloc] init];
+        
+        NSURL *url = [NSURL URLWithString:[NSString stringWithString:studentUrlName]];
+        
+        
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url];
+        
+        [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        [request setHTTPMethod:@"GET"];
+        
+        [NSURLConnection sendAsynchronousRequest:request queue:queue4 completionHandler:^(NSURLResponse *responseBody, NSData *data, NSError *error) {
+            
+            getResponse(data);
+            
+        }];
+        return YES;
+    }else{
+        return NO;
+    }
     
 }
 
@@ -184,7 +186,10 @@
 
 -(BOOL)postStudent : (Student*)student onCompletion:(PostResponse)postResponse
 {
-  if (![repositorystudents containsObject:student]){
+    BOOL getCheck = [self getStudent:student onCompletion:^(NSData *getStudentResponses) {
+        
+    }];
+    if (!getCheck){
       
      NSOperationQueue *queue1 = [[NSOperationQueue alloc] init];
     
@@ -538,7 +543,7 @@
         
         NSURL *url = [NSURL URLWithString:urlGetSudent];
         
-        NSMutableURLRequest *newReq= [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:20.0];
+        NSMutableURLRequest *newReq= [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:35.0];
         [newReq setHTTPMethod:@"GET"];
         [newReq setValue:@"application/json" forHTTPHeaderField:@"Accept"];
         
