@@ -39,12 +39,7 @@
 
 
 -(void)testAddStudent{
-    BOOL result = [service addStudent:studentTom onCompletion:^(BOOL resBlock) {
-        
-        if (resBlock){
-            NSLog(@"Success,student is added to class,\n Next steg:  click on the <submit> button ! ");
-        }
-    }];
+    BOOL result = [service addStudent:studentTom ];
     
     STAssertTrue(result,@"Student is already exists!");
     
